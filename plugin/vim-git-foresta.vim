@@ -19,7 +19,7 @@ endfunction
 
 function! s:gitforesta_show_commit_detail()
   let l:commit_id = s:gitforesta_get_selected_commit_id()
-  if l:commit_id == '        '
+  if l:commit_id == ''
     return
   endif
 
@@ -54,8 +54,11 @@ function! s:gitforesta_delete_ansi()
 endfunction
 
 function! s:gitforesta_get_selected_commit_id()
-  return getline('.')[0:7]
+  let l:commit_id = getline('.')[0:7]
+  if l:commit_id == '        '
+    return ''
+  endif
+  return l:commit_id
 endfunction
 
 command! -nargs=0 -complete=command GitForesta call <SID>gitforesta_open()
-
