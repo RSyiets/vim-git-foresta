@@ -28,6 +28,7 @@ endfunction
 function! s:gitforesta_show_commit_detail()
   let l:commit_id = s:gitforesta_get_selected_commit_id()
   if l:commit_id == ''
+    echo
     return
   endif
 
