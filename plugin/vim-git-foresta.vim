@@ -3,9 +3,17 @@
 "==================================================
 scriptencoding utf-8
 
-let g:gitforesta#executable_path = '~/bin/git-foresta'
-
 function! s:gitforesta_open() abort
+  if !exists('g:gitforesta#executable_path')
+    echo 'git-foresta path is not specified'
+    return
+  endif
+
+  if !executable(expand(g:gitforesta#executable_path))
+    echo 'the path is not found:' g:gitforesta#executable_path
+    return
+  endif
+
   new
   execute 'r!' g:gitforesta#executable_path '--all --style=10'
   1;1delete
