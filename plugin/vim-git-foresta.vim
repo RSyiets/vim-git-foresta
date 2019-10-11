@@ -41,12 +41,10 @@ function! s:gitforesta_show_commit_detail()
 endfunction
 
 function! s:gitforesta_set_buf_options()
-    " Options for a non-file/control buffer.
     setlocal bufhidden=hide
     setlocal buftype=nofile
     setlocal noswapfile
 
-    " Options for controlling buffer/window appearance.
     setlocal foldcolumn=0
     setlocal foldmethod=manual
     setlocal nobuflisted
