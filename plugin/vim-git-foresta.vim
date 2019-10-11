@@ -23,6 +23,7 @@ function! s:gitforesta_open() abort
   setlocal filetype=gitforesta
 
   map <buffer> <CR> :call <SID>gitforesta_show_commit_detail()<CR>
+  map <buffer> C :call <SID>gitforesta_cherry_pick()<CR>
 endfunction
 
 function! s:gitforesta_show_commit_detail()
@@ -38,6 +39,22 @@ function! s:gitforesta_show_commit_detail()
   call s:gitforesta_set_buf_options()
   call cursor(1,1)
   setlocal filetype=gitshow
+endfunction
+
+function! s:gitforesta_cherry_pick()
+  let l:commit_id = s:gitforesta_get_selected_commit_id()
+  if l:commit_id == ''
+    echo
+    return
+  endif
+
+  " Cherry pick the selected commit.
+  silent! execute '!git cherry-pick' l:commit_id
+
+  " Redraw git foresta.
+  quit
+  call s:gitforesta_open()
+  redraw!
 endfunction
 
 function! s:gitforesta_set_buf_options()
